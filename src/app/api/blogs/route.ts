@@ -3,15 +3,14 @@ import { NextRequest, NextResponse } from "next/server";
 import slugify from "slugify";
 import { IBlog } from "@/features/blog/types";
 
-export const TABLE_NAME_BLOGS = "tb_challenge_blogs";
-export const emptyUUID = "00000000-0000-0000-0000-000000000000";
-
 export async function GET() {
   try {
     const query = Backendless.DataQueryBuilder.create().setSortBy([
       "created ASC",
     ]);
-    const response = await Backendless.Data.of(TABLE_NAME_BLOGS).find(query);
+    const response = await Backendless.Data.of("tb_challenge_blogs").find(
+      query
+    );
 
     return NextResponse.json(
       {
@@ -45,7 +44,7 @@ export async function POST(req: NextRequest) {
       created_by: created_by,
     };
 
-    const response = (await Backendless.Data.of(TABLE_NAME_BLOGS).save(
+    const response = (await Backendless.Data.of("tb_challenge_blogs").save(
       requestData
     )) as IBlog;
 
@@ -73,7 +72,6 @@ export async function POST(req: NextRequest) {
       {
         status: "error",
         message: `${error}`,
-        // message: 'Failed to create blog. Please try again later.',
       },
       { status: 500 }
     );
