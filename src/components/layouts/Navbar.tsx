@@ -106,12 +106,14 @@ export default function Navbar() {
             );
           })}
         </ul>
-        <div className="avatar">
-          <div className="w-7 rounded-full">
-            <FaUserCircle className="w-full h-full" />
+        {auth.username && (
+          <div className="avatar">
+            <div className="w-7 rounded-full">
+              <FaUserCircle className="w-full h-full" />
+            </div>
+            <span className="ml-3 my-auto">{auth.username}</span>
           </div>
-          <span className="ml-3 my-auto">{auth.username}</span>
-        </div>
+        )}
       </div>
     </div>
   );
