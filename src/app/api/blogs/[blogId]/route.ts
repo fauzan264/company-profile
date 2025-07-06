@@ -9,7 +9,7 @@ export async function GET(
   { params }: { params: { blogId: string } }
 ) {
   try {
-    const { blogId } = await params;
+    const { blogId } = params;
 
     const queryBuilder = Backendless.DataQueryBuilder.create().setWhereClause(
       `slug = '${blogId}'`
@@ -63,7 +63,7 @@ export async function PUT(
   { params }: { params: { blogId: string } }
 ) {
   try {
-    const { blogId } = await params;
+    const { blogId } = params;
 
     const { title, image, description } = await req.json();
 
