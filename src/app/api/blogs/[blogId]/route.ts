@@ -4,10 +4,11 @@ import { TABLE_NAME_BLOGS } from "../route";
 import { IBlog } from "@/features/blog/types";
 import slugify from "slugify";
 
-export async function GET(
-  _: NextRequest,
-  { params }: { params: { blogId: string } }
-) {
+interface BlogID {
+  blogId: string;
+}
+
+export async function GET(_: NextRequest, { params }: { params: BlogID }) {
   try {
     const { blogId } = params;
 
@@ -58,10 +59,7 @@ export async function GET(
   }
 }
 
-export async function PUT(
-  req: NextRequest,
-  { params }: { params: { blogId: string } }
-) {
+export async function PUT(req: NextRequest, { params }: { params: BlogID }) {
   try {
     const { blogId } = params;
 
