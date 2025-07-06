@@ -1,62 +1,53 @@
 import Backendless from "@/lib/backendless";
 import { NextRequest, NextResponse } from "next/server";
 import slugify from "slugify";
+import { IBlog } from "@/features/blog/types";
 
-export const TABLE_NAME_BLOGS = "tb_challenge_blogs"
-export const emptyUUID = '00000000-0000-0000-0000-000000000000'
-
-export interface IBlog {
-  objectId: string,
-  title: string,
-  slug: string,
-  description: string,
-  image: string,
-  created_by: string,
-  created: string
-}
+export const TABLE_NAME_BLOGS = "tb_challenge_blogs";
+export const emptyUUID = "00000000-0000-0000-0000-000000000000";
 
 export async function GET() {
   try {
-    const query = Backendless.DataQueryBuilder.create().setSortBy(["created ASC"])
-    const response = await Backendless.Data.of(TABLE_NAME_BLOGS).find(query)
-  
+    const query = Backendless.DataQueryBuilder.create().setSortBy([
+      "created ASC",
+    ]);
+    const response = await Backendless.Data.of(TABLE_NAME_BLOGS).find(query);
+
     return NextResponse.json(
       {
-        message: 'Get list blog successful',
-        data: response
+        status: "success",
+        message: "Successfully fetched blog list",
+        data: response,
       },
       { status: 200 }
-    )
+    );
   } catch (error) {
-    console.log(error)
+    console.log(error);
     return NextResponse.json(
       {
-        message: 'Something went wrong'
+        status: "error",
+        message: "Failed to fetch blog list. Please try again later.",
       },
       { status: 500 }
-    )
+    );
   }
 }
 
 export async function POST(req: NextRequest) {
   try {
-    const {
-      title,
-      image,
-      description,
-      created_by
-    } = await req.json()
+    const { title, image, description, created_by } = await req.json();
 
     const requestData = {
       title: title,
-      slug: slugify(title, {lower: true}),
+      slug: slugify(title, { lower: true }),
       image: image,
       description: description,
-      // created_by: created_by
-      created_by: emptyUUID
-    }
+      created_by: created_by,
+    };
 
-    const response = await Backendless.Data.of(TABLE_NAME_BLOGS).save(requestData) as IBlog
+    const response = (await Backendless.Data.of(TABLE_NAME_BLOGS).save(
+      requestData
+    )) as IBlog;
 
     const responseData = {
       id: response.objectId,
@@ -65,24 +56,26 @@ export async function POST(req: NextRequest) {
       image: response.image,
       description: response.description,
       created_by: response.created_by,
-      created_at: response.created
-    }
+      created_at: response.created,
+    };
 
     return NextResponse.json(
       {
-        message: 'Create blog successful',
-        data: responseData
+        status: "success",
+        message: "Blog created successfully",
+        data: responseData,
       },
       { status: 201 }
-    )
-
-  } catch (error) {
-    console.log(error)
+    );
+  } catch (error: unknown) {
+    console.log(error);
     return NextResponse.json(
       {
-        message: "Something went wrong"
+        status: "error",
+        message: `${error}`,
+        // message: 'Failed to create blog. Please try again later.',
       },
       { status: 500 }
-    )
+    );
   }
 }
