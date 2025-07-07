@@ -29,7 +29,7 @@ export default function AdminBlogPage() {
           <h1 className="text-2xl">List Blog</h1>
           <Link
             href="/admin/blog/create"
-            className="btn btn-neutral ml-auto text-slate-50"
+            className="btn btn-sm btn-neutral ml-auto text-slate-50"
           >
             Tambah Blog
           </Link>
