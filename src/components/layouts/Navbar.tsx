@@ -2,18 +2,27 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import Image from "next/image";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { HiOutlineMenuAlt1 } from "react-icons/hi";
 import { authStore } from "@/store/auth.store";
 import { FaUserCircle } from "react-icons/fa";
+import { toast } from "react-toastify";
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeHref, setActiveHref] = useState("");
   const pathname = usePathname();
+  const router = useRouter();
 
   const handleClick = (href: string) => {
     setActiveHref(href);
+  };
+
+  const onLogoutUser = () => {
+    logout();
+    console.log(logout());
+    toast.success("Success Logout!");
+    router.push("/login");
   };
 
   useEffect(() => {
@@ -32,9 +41,10 @@ export default function Navbar() {
     { href: "/about-us", label: "About Us" },
     { href: "/team", label: "Teams" },
     { href: "/login", label: "Login" },
+    { href: "/admin", label: "Dashboard" },
   ];
 
-  const { auth } = authStore();
+  const { auth, logout } = authStore();
 
   return (
     <div
@@ -89,7 +99,9 @@ export default function Navbar() {
               <li
                 key={i}
                 className={`rounded-md transition hover:bg-gray-100 hover:text-black ${
-                  auth && nav_item.href == "/login" && "hidden"
+                  auth.userId != "" && nav_item.href == "/login" && "hidden"
+                } ${
+                  auth.userId == "" && nav_item.href == "/admin" && "hidden"
                 } ${
                   activeHref === nav_item.href ? "bg-slate-50 text-black" : ""
                 }`}
@@ -131,7 +143,9 @@ export default function Navbar() {
               <a>Settings</a>
             </li>
             <li>
-              <a>Logout</a>
+              <Link href={"#"} onClick={() => onLogoutUser()}>
+                Logout
+              </Link>
             </li>
           </ul>
         </div>
