@@ -23,7 +23,7 @@ const CreateBlog = async ({
     created_by: created_by,
   };
 
-  const response = await api.post(`/users`, data);
+  const response = await api.post(`/blogs`, data);
   return response;
 };
 
