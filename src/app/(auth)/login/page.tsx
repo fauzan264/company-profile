@@ -4,6 +4,7 @@ import { Login } from "@/services/auth";
 import { authStore } from "@/store/auth.store";
 import axios from "axios";
 import { Formik, Field, Form, ErrorMessage } from "formik";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 
@@ -98,6 +99,12 @@ export default function LoginPage() {
             </button>
           </Form>
         </Formik>
+        <p>
+          {"Don't have an account? "}
+          <Link href="/register" className="text-blue-800">
+            Register
+          </Link>
+        </p>
       </fieldset>
     </div>
   );
