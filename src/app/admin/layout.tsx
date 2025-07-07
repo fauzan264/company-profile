@@ -1,3 +1,4 @@
+"use client";
 // import Sidebar from "@/components/layouts/Sidebar";
 import { authStore } from "@/store/auth.store";
 import Link from "next/link";
