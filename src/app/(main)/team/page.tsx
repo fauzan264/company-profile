@@ -1,9 +1,11 @@
 "use client";
+import TeamCard from "@/features/team/components/TeamCard";
 import { GetTeams } from "@/services/teams";
 import { useEffect, useState } from "react";
+import { ResponseTeam } from "@/features/team/type";
 
 export default function TeamPage() {
-  const [teams, setTeams] = useState<any[]>([]);
+  const [teams, setTeams] = useState<ResponseTeam[]>([]);
   const getDataTeams = async () => {
     try {
       const response = await GetTeams();
@@ -23,28 +25,12 @@ export default function TeamPage() {
       <div className="grid grid-cols-5 justify-items-center gap-5 mt-5">
         {teams.map((team, i) => {
           return (
-            <div key={i} className="card bg-base-100 w-64 shadow-sm">
-              <figure>
-                <img
-                  src={team.picture.large}
-                  alt={`${team.name.first} ${team.name.last}`}
-                  className="w-full"
-                />
-              </figure>
-              <div className="card-body">
-                <h3 className="card-title">
-                  {team.name.first} {team.name.last}
-                </h3>
-                <div className="card-actions">
-                  <div className="badge badge-outline">Software Engineer</div>
-                </div>
-                <p>
-                  Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                  Optio ut aperiam blanditiis nemo exercitationem magnam
-                  accusantium, vitae fugiat id quas.
-                </p>
-              </div>
-            </div>
+            <TeamCard
+              key={i}
+              picture={team.picture.large}
+              firstname={team.name.first}
+              lastname={team.name.last}
+            />
           );
         })}
       </div>
