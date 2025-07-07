@@ -10,6 +10,7 @@ export type TAuth = {
 export interface IAuthStoreStateProps {
   auth: TAuth;
   setAuth: ({ username, email, userId }: TAuth) => void;
+  logout: () => void;
 }
 
 export const authStore = create<IAuthStoreStateProps>()(
@@ -24,6 +25,12 @@ export const authStore = create<IAuthStoreStateProps>()(
         set(() => ({
           auth: { username: username, email: email, userId: userId },
         })),
+      logout: () => {
+        set({
+          auth: { username: "", email: "", userId: "" },
+        });
+        localStorage.removeItem("auth-session");
+      },
     }),
     {
       name: "auth-session",
