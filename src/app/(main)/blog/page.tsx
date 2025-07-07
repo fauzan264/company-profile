@@ -21,7 +21,6 @@ export default function BlogPage() {
   useEffect(() => {
     fetchData();
   }, []);
-  console.log(blogs);
 
   if (loading) {
     return (
