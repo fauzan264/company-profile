@@ -22,7 +22,6 @@ export default function LoginPage() {
     try {
       const data = { email: email, password: password };
       const response = await Login(data);
-      console.log(response?.data?.data?.id);
 
       if (response.status == 200) {
         setAuth({
@@ -41,7 +40,6 @@ export default function LoginPage() {
         toast.error(message);
       } else {
         toast.error("Unexpected error occured.");
-        console.log(error);
       }
     }
   };
@@ -100,7 +98,7 @@ export default function LoginPage() {
           </Form>
         </Formik>
         <p>
-          {"Don't have an account? "}
+          {"Don't have an account?"}
           <Link href="/register" className="text-blue-800">
             Register
           </Link>
