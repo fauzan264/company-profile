@@ -30,7 +30,6 @@ export default function RegisterPage() {
         toast.error(message);
       } else {
         toast.error("Unexpected error occurred.");
-        console.log(error);
       }
     }
   };
