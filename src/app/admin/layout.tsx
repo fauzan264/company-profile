@@ -1,5 +1,7 @@
 // import Sidebar from "@/components/layouts/Sidebar";
+import { authStore } from "@/store/auth.store";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import React from "react";
 
 interface AdminLayoutProps {
@@ -7,10 +9,18 @@ interface AdminLayoutProps {
 }
 
 export default function AdminLayout({ children }: AdminLayoutProps) {
+  const route = useRouter();
+  const { auth } = authStore();
+
+  if (auth) {
+    route.push("/login");
+  }
+
   const nav_items = [
     { href: "/admin/", label: "Dashboard" },
     { href: "/admin/blog", label: "Blog" },
   ];
+
   return (
     <div className="flex flex-1 pt-16">
       <div className="drawer lg:drawer-open">
