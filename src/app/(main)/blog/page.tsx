@@ -2,9 +2,10 @@
 import { GetBlogs } from "@/services/blogs";
 import React, { useEffect, useState } from "react";
 import BlogCard from "@/features/blog/components/BlogCard";
+import { IBlog } from "@/features/blog/types";
 
 export default function BlogPage() {
-  const [blogs, setBlogs] = useState<any[]>([]);
+  const [blogs, setBlogs] = useState<IBlog[]>([]);
   const [loading, setLoading] = useState(true);
 
   const fetchData = async () => {
