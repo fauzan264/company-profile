@@ -26,7 +26,7 @@ export async function generateMetadata({
     openGraph: {
       title: `${blog.data.title}`,
       description: `${blog.data.description}`,
-      url: `https://company-profile-redesign.vercel.app/blog/${params.slug}`,
+      url: `https://company-profile-redesign.vercel.app/blog/${slug}`,
       siteName: "Redesign Company Profile",
       locale: "id_ID",
       type: "website",
