@@ -4,6 +4,7 @@ import { IRegister } from "@/features/auth/register/types";
 import { Register } from "@/services/auth";
 import axios from "axios";
 import { Formik, Form, Field, ErrorMessage } from "formik";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 
@@ -36,19 +37,20 @@ export default function RegisterPage() {
 
   return (
     <div className="flex justify-center my-70">
-      <Formik
-        initialValues={{ username: "", email: "", password: "" }}
-        validationSchema={registerValidationSchema}
-        onSubmit={(values) => {
-          onRegisterUser({
-            username: values.username,
-            email: values.email,
-            password: values.password,
-          });
-        }}
-      >
-        <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4">
-          <h1 className="text-center font-bold text-base">Register</h1>
+      <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4">
+        <h1 className="text-center font-bold text-base">Register</h1>
+
+        <Formik
+          initialValues={{ username: "", email: "", password: "" }}
+          validationSchema={registerValidationSchema}
+          onSubmit={(values) => {
+            onRegisterUser({
+              username: values.username,
+              email: values.email,
+              password: values.password,
+            });
+          }}
+        >
           <Form>
             <label htmlFor="username" className="label">
               Username
@@ -102,8 +104,14 @@ export default function RegisterPage() {
               Register
             </button>
           </Form>
-        </fieldset>
-      </Formik>
+        </Formik>
+        <p>
+          {"Don't have an account? "}
+          <Link href="/login" className="text-blue-800">
+            Login
+          </Link>
+        </p>
+      </fieldset>
     </div>
   );
 }
