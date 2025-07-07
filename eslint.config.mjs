@@ -4,7 +4,6 @@ import tseslint from "typescript-eslint";
 import pluginReact from "eslint-plugin-react";
 import json from "@eslint/json";
 import markdown from "@eslint/markdown";
-import css from "@eslint/css";
 import { defineConfig } from "eslint/config";
 
 export default defineConfig([
@@ -30,12 +29,6 @@ export default defineConfig([
     plugins: { markdown },
     language: "markdown/gfm",
     extends: ["markdown/recommended"],
-  },
-  {
-    files: ["**/*.css"],
-    plugins: { css },
-    language: "css/css",
-    extends: ["css/recommended"],
   },
   {
     files: ["**/*.{js,ts,jsx,tsx}"],
