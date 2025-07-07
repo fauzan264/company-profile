@@ -1,5 +1,4 @@
 import { GetDetailBlog } from "@/services/blogs";
-import BlogHero from "@/features/blog/components/BlogHero";
 import Image from "next/image";
 
 export default async function DetailBlog({
@@ -9,7 +8,7 @@ export default async function DetailBlog({
 }) {
   const { slug } = await params;
   const blog = await GetDetailBlog(slug);
-  // console.log(blog);
+
   return (
     <div className="container mx-auto">
       <div className="relative w-full h-100 mt-20 overflow-hidden">
