@@ -1,20 +1,18 @@
 import { NextRequest, NextResponse } from "next/server";
 import slugify from "slugify";
 import { IBlog } from "@/features/blog/types";
+import Backendless from "@/lib/backendless";
 
-interface Context {
-  params: {
-    blogId: string;
-  };
-}
+type Params = Promise<{ blogId: string }>;
 
-export async function GET(_: NextRequest, context: Context) {
+export async function GET(_: NextRequest, { params }: { params: Params }) {
   try {
-    const { blogId } = context.params;
+    const { blogId } = await params;
 
     const queryBuilder = Backendless.DataQueryBuilder.create().setWhereClause(
       `slug = '${blogId}'`
     );
+
     const response = (await Backendless.Data.of("tb_challenge_blogs").findFirst(
       queryBuilder
     )) as IBlog;
@@ -58,12 +56,9 @@ export async function GET(_: NextRequest, context: Context) {
   }
 }
 
-export async function PUT(
-  req: NextRequest,
-  { params }: { params: { blogId: string } }
-) {
+export async function PUT(req: NextRequest, { params }: { params: Params }) {
   try {
-    const { blogId } = params;
+    const { blogId } = await params;
 
     const { title, image, description } = await req.json();
 
