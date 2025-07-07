@@ -1,12 +1,15 @@
 import { Metadata } from "next";
 import { GetDetailBlog } from "@/services/blogs";
 
+type Params = Promise<{ slug: string }>;
+
 export async function generateMetadata({
   params,
 }: {
-  params: { slug: string };
+  params: Params;
 }): Promise<Metadata | undefined> {
-  const blog = await GetDetailBlog(params?.slug);
+  const { slug } = await params;
+  const blog = await GetDetailBlog(slug);
 
   return {
     title: `${blog.data.title}`,
