@@ -12,7 +12,7 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
   const route = useRouter();
   const { auth } = authStore();
 
-  if (auth) {
+  if (!auth) {
     route.push("/login");
   }
 
