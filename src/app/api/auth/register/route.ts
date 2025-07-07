@@ -1,12 +1,11 @@
 import Backendless from "@/lib/backendless";
 import { NextRequest, NextResponse } from "next/server";
-import { TABLE_NAME_USERS } from "../login/route";
 
 export async function POST(req: NextRequest) {
   try {
     const { username, email, password } = await req.json();
 
-    const response = await Backendless.Data.of(TABLE_NAME_USERS).save({
+    const response = await Backendless.Data.of("tb_challenge_users").save({
       username: username,
       email: email,
       password: password,

@@ -1,8 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import Backendless from "@/lib/backendless";
 
-export const TABLE_NAME_USERS = "tb_challenge_users";
-
 export interface IResponseUser {
   objectId: string;
   username: string;
@@ -18,7 +16,7 @@ export async function POST(req: NextRequest) {
     );
     // .setWhereClause(`password = ${password}`)
 
-    const response = (await Backendless.Data.of(TABLE_NAME_USERS).findFirst(
+    const response = (await Backendless.Data.of("tb_challenge_users").findFirst(
       queryBuilder
     )) as IResponseUser;
 
