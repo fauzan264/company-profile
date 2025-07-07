@@ -4,7 +4,7 @@ export interface Team {
   lastname: string;
 }
 
-interface ResponseTeam {
+export interface ResponseTeam {
   picture: {
     large: string;
   };
