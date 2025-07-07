@@ -1,5 +1,7 @@
 import { GetDetailBlog } from "@/services/blogs";
 import Image from "next/image";
+import { generateMetadata } from "./metadata";
+export { generateMetadata };
 
 export default async function DetailBlog({
   params,
