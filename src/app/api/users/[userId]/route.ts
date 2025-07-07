@@ -2,12 +2,11 @@ import Backendless from "@/lib/backendless";
 import { NextRequest, NextResponse } from "next/server";
 import { IResponseUser } from "../../auth/login/route";
 
-export async function GET(
-  _: NextRequest,
-  { params }: { params: { userId: string } }
-) {
+type Params = Promise<{ userId: string }>;
+
+export async function GET(_: NextRequest, { params }: { params: Params }) {
   try {
-    const { userId } = params;
+    const { userId } = await params;
 
     const response = (await Backendless.Data.of("tb_challenge_users").findById(
       userId
@@ -34,10 +33,7 @@ export async function GET(
   }
 }
 
-export async function PUT(
-  req: NextRequest,
-  { params }: { params: { userId: string } }
-) {
+export async function PUT(req: NextRequest, { params }: { params: Params }) {
   try {
     const { userId } = await params;
 
