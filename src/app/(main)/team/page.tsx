@@ -27,7 +27,7 @@ export default function TeamPage() {
           return (
             <TeamCard
               key={i}
-              picture={team.picture.large}
+              picture={team.picture.medium}
               firstname={team.name.first}
               lastname={team.name.last}
             />

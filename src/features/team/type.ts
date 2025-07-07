@@ -6,7 +6,7 @@ export interface Team {
 
 export interface ResponseTeam {
   picture: {
-    large: string;
+    medium: string;
   };
   name: {
     first: string;
