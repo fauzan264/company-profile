@@ -3,7 +3,7 @@ import slugify from "slugify";
 import { IBlog } from "@/features/blog/types";
 
 export async function GET(
-  _: NextRequest,
+  req: NextRequest,
   { params }: { params: { blogId: string } }
 ) {
   try {
