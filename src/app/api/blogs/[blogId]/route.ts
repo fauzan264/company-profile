@@ -2,12 +2,15 @@ import { NextRequest, NextResponse } from "next/server";
 import slugify from "slugify";
 import { IBlog } from "@/features/blog/types";
 
-export async function GET(
-  req: NextRequest,
-  { params }: { params: { blogId: string } }
-) {
+interface Context {
+  params: {
+    blogId: string;
+  };
+}
+
+export async function GET(_: NextRequest, context: Context) {
   try {
-    const { blogId } = params;
+    const { blogId } = context.params;
 
     const queryBuilder = Backendless.DataQueryBuilder.create().setWhereClause(
       `slug = '${blogId}'`
